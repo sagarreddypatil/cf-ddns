@@ -1,7 +1,7 @@
 [project]
 name = "cf-ddns"
 version = "0.1.0"
-description = "Add your description here"
+description = "Cloudflare DDNS Script"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -9,3 +9,6 @@ dependencies = [
     "dotenv>=0.9.9",
     "requests>=2.32.3",
 ]
+
+[project.scripts]
+cf-ddns = "cf_ddns:main"

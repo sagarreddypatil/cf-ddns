@@ -37,7 +37,8 @@ def update_dns(ip: str) -> None:
         comment="Scripted DDNS update",
     )
 
-if __name__ == "__main__":
+
+def main():
     try:
         ip_address = get_ip()
         print(f"Current IP address: {ip_address}")
