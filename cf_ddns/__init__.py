@@ -32,7 +32,7 @@ def update_dns(ip: str) -> None:
         name=DOMAIN_NAME,
         content=ip,
         ttl=1,  # 1 means auto
-        proxied=True,
+        proxied=False,
         type="A",
         comment="Scripted DDNS update",
     )
