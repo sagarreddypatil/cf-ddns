@@ -31,7 +31,7 @@ def update_dns(ip: str) -> None:
         zone_id=ZONE_ID,
         name=DOMAIN_NAME,
         content=ip,
-        ttl=1,  # 1 means auto
+        ttl=60,  # seconds
         proxied=False,
         type="A",
         comment="Scripted DDNS update",
