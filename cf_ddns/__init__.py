@@ -2,6 +2,7 @@ import os
 import requests as re
 from cloudflare import Cloudflare
 from dotenv import load_dotenv
+from datetime import datetime, timezone
 
 load_dotenv()
 
@@ -26,6 +27,7 @@ def get_ip() -> str:
 
 
 def update_dns(ip: str) -> None:
+    time_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
     _ = client.dns.records.update(
         dns_record_id=DNS_RECORD_ID,
         zone_id=ZONE_ID,
@@ -34,15 +36,16 @@ def update_dns(ip: str) -> None:
         ttl=60,  # seconds
         proxied=False,
         type="A",
-        comment="Scripted DDNS update",
+        comment=f"cf-ddns at {time_str}",
     )
+    return time_str
 
 
 def main():
     try:
         ip_address = get_ip()
         print(f"Current IP address: {ip_address}")
-        update_dns(ip_address)
-        print("DNS record updated successfully.")
+        time_str = update_dns(ip_address)
+        print(f"DNS record updated successfully at {time_str}.")
     except Exception as e:
         print(f"An error occurred: {e}")
